@@ -7,7 +7,6 @@ public partial class MainPage : ContentPage
 {
 	private readonly IGameSceneManager gameSceneManager;
 	private readonly MainScene mainScene;
-    private readonly GameManager gameManager;
 
     // Variables that hold direction
     private readonly PointF Left = new(-10, 0);
@@ -15,11 +14,10 @@ public partial class MainPage : ContentPage
     private readonly PointF Up = new(0, -10);
     private readonly PointF Down = new(0, 10);
 
-    public MainPage(IGameSceneManager gameSceneManager, MainScene mainScene, GameManager gameManager)
+    public MainPage(IGameSceneManager gameSceneManager, MainScene mainScene)
 	{
 		InitializeComponent();
         this.gameSceneManager = gameSceneManager;
-        this.gameManager = gameManager;
        
 		this.mainScene = mainScene;
 		gameSceneManager.LoadScene(mainScene, GameView);
@@ -58,13 +56,13 @@ public partial class MainPage : ContentPage
 
         GameView.WidthRequest = (float)((int)(contentPage.Width / 10) * 10) - 30;
         GameView.HeightRequest = (float)((int)(contentPage.Height / 10) * 10) - 50;
-        gameManager.Paddle.Left = new(15, (float)GameView.HeightRequest - 30);
-        gameManager.Ball.CenterPoint = new(85, (float)GameView.HeightRequest - 45);
+        mainScene.Paddle.Left = new(15, (float)GameView.HeightRequest - 30);
+        mainScene.Ball.CenterPoint = new(85, (float)GameView.HeightRequest - 45);
 
-        gameManager.PaddleStart = gameManager.Paddle.Left;
-        gameManager.BallStart = gameManager.Ball.CenterPoint;
+        mainScene.Paddle.PaddleStart = mainScene.Paddle.Left;
+        mainScene.Ball.BallStart = mainScene.Ball.CenterPoint;
 
-        gameManager.BallAttached = true;
+        mainScene.Ball.BallAttached = true;
         #endregion Game Setup
     }
     /// <summary>
@@ -84,10 +82,10 @@ public partial class MainPage : ContentPage
         {
             // Handle Left Command
             case "a":
-                if (gameManager.Paddle.Left.X - 10 > 15)
+                if (mainScene.Paddle.Left.X - 10 > 15)
                 {
                     mainScene.UpdatePaddle(Left.X, Left.Y);
-                    if (gameManager.BallAttached)
+                    if (mainScene.Ball.BallAttached)
                     {
                         mainScene.UpdateBall(Left.X, Left.Y);
                     }
@@ -95,10 +93,10 @@ public partial class MainPage : ContentPage
                 break;
             // Handle Down Command
             case "s":
-                if (gameManager.Paddle.Left.Y + 10 < GameView.HeightRequest - 40)
+                if (mainScene.Paddle.Left.Y + 10 < GameView.HeightRequest - 40)
                 {
                     mainScene.UpdatePaddle(Down.X, Down.Y);
-                    if (gameManager.BallAttached)
+                    if (mainScene.Ball.BallAttached)
                     {
                         mainScene.UpdateBall(Down.X, Down.Y);
                     }
@@ -106,11 +104,11 @@ public partial class MainPage : ContentPage
                 break;
             // Handle Up Command
             case "w":
-                if (gameManager.Paddle.Left.Y - 10 > GameView.HeightRequest - 140)
+                if (mainScene.Paddle.Left.Y - 10 > GameView.HeightRequest - 140)
                 {
                     mainScene.UpdatePaddle(Up.X, Up.Y);
 
-                    if (gameManager.BallAttached)
+                    if (mainScene.Ball.BallAttached)
                     {
                         mainScene.UpdateBall(Up.X, Up.Y);
                     }
@@ -118,10 +116,10 @@ public partial class MainPage : ContentPage
                 break;
             // Handle Right Command
             case "d":
-                if (gameManager.Paddle.Left.X + gameManager.Paddle.Width + 10 < GameView.WidthRequest - 10)
+                if (mainScene.Paddle.Left.X + mainScene.Paddle.Width + 10 < GameView.WidthRequest - 10)
                 {
                     mainScene.UpdatePaddle(Right.X, Right.Y);
-                    if (gameManager.BallAttached)
+                    if (mainScene.Ball.BallAttached)
                     {
                         mainScene.UpdateBall(Right.X, Right.Y);
                     }
@@ -129,9 +127,9 @@ public partial class MainPage : ContentPage
                 break;
             // Handle Launch Command
             case "l":
-                if (gameManager.BallAttached)
+                if (mainScene.Ball.BallAttached)
                 {
-                    gameManager.LaunchBall();
+                    mainScene.Ball.LaunchBall();
 
                 }
                 break;

@@ -8,6 +8,7 @@ public class Block : GameObject
     public SizeF Size = new(100, 50);
     public Color Color { get; set; }
 
+    public int RequiredHits = 2;
     public override void Render(ICanvas canvas, RectF dimensions)
     {
         base.Render(canvas, dimensions);

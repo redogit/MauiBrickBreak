@@ -5,14 +5,21 @@ namespace MauiBrickBreak.GameScenes;
 
 public class MainScene : GameScene
 {
-    internal GameManager GameManager { get; }
-    internal List<Block> Blocks = new();
-    public MainScene(GameManager gameManager)
-    {
+    internal readonly Paddle Paddle;
 
-        Add(gameManager.Paddle);
-        Add(gameManager.Ball);
-        GameManager = gameManager;
+    internal readonly Ball Ball;
+
+    private int Score = 0;
+
+    internal List<Block> Blocks = new();
+    public MainScene(Paddle Paddle, Ball Ball)
+    {
+        Paddle.Color = Colors.Red;
+        this.Paddle = Paddle;
+        Ball.Color = Colors.Black;
+        this.Ball = Ball;
+        Add(Paddle);
+        Add(Ball);
         Blocks.Add(new() { Left = new(415, 15), Color = Colors.Grey });
         Blocks.Add(new() { Left = Blocks[^1].Left.Offset(105, 0), Color = Colors.Grey });
         Blocks.Add(new() { Left = Blocks[^1].Left.Offset(105, 0), Color = Colors.Grey });
@@ -57,65 +64,69 @@ public class MainScene : GameScene
         canvas.StrokeSize = 15;
         canvas.StrokeColor = Colors.Black;
         canvas.DrawRectangle(dimensions);
-        if (!GameManager.BallAttached)
+        if (!Ball.BallAttached)
         {
             #region ball
             // Check paddle collision.
-            if (GameManager.Paddle.Bounds.IntersectsWith(GameManager.Ball.Bounds))
+            if (Paddle.Bounds.IntersectsWith(Ball.Bounds))
             {
-                GameManager.BallVelocityY *= -1;
-                GameManager.Score++;
+                Ball.BallVelocityY *= -1;
+                Score++;
             }
             // Check ceiling collision.
-            else if (GameManager.Ball.CenterPoint.Y < 15)
+            else if (Ball.CenterPoint.Y < 15)
             {
-                GameManager.BallVelocityY *= -1;
+                Ball.BallVelocityY *= -1;
             }
             // Check for wall collision.
-            else if (GameManager.Ball.CenterPoint.X < 15 || GameManager.Ball.CenterPoint.X > dimensions.Right - 15)
+            else if (Ball.CenterPoint.X < 15 || Ball.CenterPoint.X > dimensions.Right - 15)
             {
-                GameManager.BallVelocityX *= -1;
+                Ball.BallVelocityX *= -1;
             }
             // Check if ball is below paddle.
-            else if (GameManager.Ball.CenterPoint.Y >= GameManager.Paddle.Left.Y)
+            else if (Ball.CenterPoint.Y >= Paddle.Left.Y)
             {
-                GameManager.Paddle.Left = GameManager.PaddleStart;
-                GameManager.Ball.CenterPoint = GameManager.BallStart;
-                GameManager.BallAttached = true;
-                GameManager.BallVelocityX = 0;
-                GameManager.BallVelocityY = 0;
+                Paddle.Left = Paddle.PaddleStart;
+                Ball.CenterPoint = Ball.BallStart;
+                Ball.BallAttached = true;
+                Ball.BallVelocityX = 0;
+                Ball.BallVelocityY = 0;
             }
-            if (GameManager.Ball.CenterPoint.Y < 200)
+            if (Ball.CenterPoint.Y < 200)
             {
                 FindBlockBallCollision();
             }
-            UpdateBall(GameManager.BallVelocityX, GameManager.BallVelocityY);
+            UpdateBall(Ball.BallVelocityX, Ball.BallVelocityY);
             #endregion ball
 
             #region Score
-            canvas.DrawString($"Score:{GameManager.Score}", 15, 10, 100, 50, Microsoft.Maui.Graphics.HorizontalAlignment.Left, Microsoft.Maui.Graphics.VerticalAlignment.Top);
+            canvas.DrawString($"Score:{Score}", 15, 10, 100, 50, HorizontalAlignment.Left, VerticalAlignment.Top);
             #endregion Score
             
         }
     }
     public void UpdatePaddle(float x, float y)
     {
-        GameManager.Paddle.UpdatePaddle(x, y);
+        Paddle.UpdatePaddle(x, y);
     }
 
     public void UpdateBall(float x, float y)
     {
-        GameManager.Ball.UpdateBall(x, y);
+        Ball.UpdateBall(x, y);
     }
     public bool FindBlockBallCollision()
     {
         for (int i = 0; i < Blocks.Count; i++)
         {
-            if (Blocks[i].Bounds.IntersectsWith(GameManager.Ball.Bounds))
+            if (Blocks[i].Bounds.IntersectsWith(Ball.Bounds))
             {
-                Remove(Blocks[i]);
-                Blocks.RemoveAt(i);
-                GameManager.BallVelocityY *= -1;
+                if (Blocks[i].RequiredHits-- == 0)
+                {
+                    Remove(Blocks[i]);
+                    Blocks.RemoveAt(i);
+                    
+                }
+                Ball.BallVelocityY *= -1;
                 return true;
             }
         }

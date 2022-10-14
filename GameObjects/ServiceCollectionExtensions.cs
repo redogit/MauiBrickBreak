@@ -5,7 +5,6 @@
         public static IServiceCollection RegisterGameObjects(this IServiceCollection services) =>
             services
                 .AddSingleton<Paddle>()
-                .AddSingleton<Ball>()
-                .AddSingleton<GameManager>();
+                .AddSingleton<Ball>();
     }
 }

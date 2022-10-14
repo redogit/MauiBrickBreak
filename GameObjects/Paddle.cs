@@ -4,7 +4,7 @@ namespace MauiBrickBreak.GameObjects;
 
 public class Paddle : GameObject
 {
-
+    internal PointF PaddleStart;
     public PointF Left { get; set; }
 
     internal readonly float Width = 150;
