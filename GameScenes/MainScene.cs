@@ -126,6 +126,7 @@ public class MainScene : GameScene
                     Blocks.RemoveAt(i);
                     
                 }
+                var bi = Blocks[i].Bounds.Intersect(Ball.Bounds);
                 Ball.BallVelocityY *= -1;
                 return true;
             }

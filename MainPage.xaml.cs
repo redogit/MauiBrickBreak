@@ -13,7 +13,7 @@ public partial class MainPage : ContentPage
     private readonly PointF Right = new(10, 0);
     private readonly PointF Up = new(0, -10);
     private readonly PointF Down = new(0, 10);
-
+    
     public MainPage(IGameSceneManager gameSceneManager, MainScene mainScene)
 	{
 		InitializeComponent();
@@ -130,7 +130,6 @@ public partial class MainPage : ContentPage
                 if (mainScene.Ball.BallAttached)
                 {
                     mainScene.Ball.LaunchBall();
-
                 }
                 break;
             default:
