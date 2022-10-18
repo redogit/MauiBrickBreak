@@ -1,16 +1,16 @@
 ﻿using Orbit.Engine;
+using System.Numerics;
 
 namespace MauiBrickBreak.GameObjects;
 
 public class Ball : GameObject
 {
-    public PointF CenterPoint { get; set; }
+    public Vector3 CenterPoint = Vector3.Zero;
     internal readonly float RadiusX = 10;
     internal readonly float RadiusY = 10;
-    public float BallVelocityX { get; internal set; }
-    public float BallVelocityY { get; internal set; }
-    public bool BallAttached { get; set; }
-    internal PointF BallStart;
+    public Vector3 Velocity = Vector3.Zero;
+    public bool BallAttached { get; internal set; }
+    internal Vector3 BallStart;
     public Color Color { get; set; }
     
     public override void Render(ICanvas canvas, RectF dimensions)
@@ -26,14 +26,13 @@ public class Ball : GameObject
         base.Update(millisecondsSinceLastUpdate);
     }
 
-    public void UpdateBall(float x, float y)
+    public void UpdateBall(Vector3 Offset)
     {
-        CenterPoint = new(CenterPoint.X + x, CenterPoint.Y + y);
+        CenterPoint = Vector3.Add(CenterPoint, Offset);
     }
     public void LaunchBall()
     {
         BallAttached = !BallAttached;
-        BallVelocityX = -5;
-        BallVelocityY = -5;
+        Velocity = new(-5, -5, 0);
     }
 }

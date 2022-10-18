@@ -1,5 +1,6 @@
 ﻿using MauiBrickBreak.GameScenes;
 using Orbit.Engine;
+using System.Numerics;
 
 namespace MauiBrickBreak;
 
@@ -9,10 +10,10 @@ public partial class MainPage : ContentPage
 	private readonly MainScene mainScene;
 
     // Variables that hold direction
-    private readonly PointF Left = new(-10, 0);
-    private readonly PointF Right = new(10, 0);
-    private readonly PointF Up = new(0, -10);
-    private readonly PointF Down = new(0, 10);
+    private readonly Vector3 Left = new(-10, 0, 0);
+    private readonly Vector3 Right = new(10, 0, 0);
+    private readonly Vector3 Up = new(0, -10, 0);
+    private readonly Vector3 Down = new(0, 10, 0);
     
     public MainPage(IGameSceneManager gameSceneManager, MainScene mainScene)
 	{
@@ -56,8 +57,8 @@ public partial class MainPage : ContentPage
 
         GameView.WidthRequest = (float)((int)(contentPage.Width / 10) * 10) - 30;
         GameView.HeightRequest = (float)((int)(contentPage.Height / 10) * 10) - 50;
-        mainScene.Paddle.Left = new(15, (float)GameView.HeightRequest - 30);
-        mainScene.Ball.CenterPoint = new(85, (float)GameView.HeightRequest - 45);
+        mainScene.Paddle.Left = new Vector3(230, (float)GameView.HeightRequest - 30, 0);
+        mainScene.Ball.CenterPoint = new(300, (float)GameView.HeightRequest - 45, 0);
 
         mainScene.Paddle.PaddleStart = mainScene.Paddle.Left;
         mainScene.Ball.BallStart = mainScene.Ball.CenterPoint;
@@ -82,12 +83,12 @@ public partial class MainPage : ContentPage
         {
             // Handle Left Command
             case "a":
-                if (mainScene.Paddle.Left.X - 10 > 15)
+                if (mainScene.Paddle.Left.X - 10 > 215)
                 {
-                    mainScene.UpdatePaddle(Left.X, Left.Y);
+                    mainScene.UpdatePaddle(Left);
                     if (mainScene.Ball.BallAttached)
                     {
-                        mainScene.UpdateBall(Left.X, Left.Y);
+                        mainScene.UpdateBall(Left);
                     }
                 }
                 break;
@@ -95,10 +96,10 @@ public partial class MainPage : ContentPage
             case "s":
                 if (mainScene.Paddle.Left.Y + 10 < GameView.HeightRequest - 40)
                 {
-                    mainScene.UpdatePaddle(Down.X, Down.Y);
+                    mainScene.UpdatePaddle(Down);
                     if (mainScene.Ball.BallAttached)
                     {
-                        mainScene.UpdateBall(Down.X, Down.Y);
+                        mainScene.UpdateBall(Down);
                     }
                 }
                 break;
@@ -106,22 +107,22 @@ public partial class MainPage : ContentPage
             case "w":
                 if (mainScene.Paddle.Left.Y - 10 > GameView.HeightRequest - 140)
                 {
-                    mainScene.UpdatePaddle(Up.X, Up.Y);
+                    mainScene.UpdatePaddle(Up);
 
                     if (mainScene.Ball.BallAttached)
                     {
-                        mainScene.UpdateBall(Up.X, Up.Y);
+                        mainScene.UpdateBall(Up);
                     }
                 }
                 break;
             // Handle Right Command
             case "d":
-                if (mainScene.Paddle.Left.X + mainScene.Paddle.Width + 10 < GameView.WidthRequest - 10)
+                if (mainScene.Paddle.Left.X + mainScene.Paddle.Width + 10 < GameView.WidthRequest - 215)
                 {
-                    mainScene.UpdatePaddle(Right.X, Right.Y);
+                    mainScene.UpdatePaddle(Right);
                     if (mainScene.Ball.BallAttached)
                     {
-                        mainScene.UpdateBall(Right.X, Right.Y);
+                        mainScene.UpdateBall(Right);
                     }
                 }
                 break;

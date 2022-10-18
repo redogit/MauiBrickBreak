@@ -1,11 +1,7 @@
 {
   "profiles": {
     "Windows Machine": {
-      "commandName": "MsixPackage",
-      "nativeDebugging": false,
-      "alwaysReinstallApp": true,
-      "allowLocalNetworkLoopbackProperty": false,
-      "doNotLaunchApp": false
+      "commandName": "MsixPackage"
     }
   }
 }

@@ -1,5 +1,4 @@
-﻿using Microsoft.Maui.Controls.Shapes;
-using Orbit.Engine;
+﻿using Orbit.Engine;
 
 namespace MauiBrickBreak.GameObjects;
 
@@ -10,7 +9,8 @@ public class Block : GameObject
     public SizeF Size = new(100, 50);
     public Color Color { get; set; }
     public RectF[] HitLines { get; set; }
-    public int RequiredHits = 2;
+    public int RequiredHits = 3;
+    public bool HasBonus = false;
     private PointF BuildLines(PointF point)
     {
         HitLines = new[]
@@ -29,12 +29,14 @@ public class Block : GameObject
 
     public RectF GetIntersectingHitLine(Ball ball)
     {
-        RectF ballLine = new(ball.CenterPoint.X + ball.BallVelocityX + ball.BallVelocityX, ball.CenterPoint.Y + ball.BallVelocityY + ball.BallVelocityY, ball.RadiusX, ball.RadiusY); ;
-        if(ballLine.IntersectsWith(HitLines[0]))
+
+        RectF ballLine = new(ball.CenterPoint.X + ball.Velocity.X * 2, ball.CenterPoint.Y + ball.Velocity.Y * 2, ball.RadiusX, ball.RadiusY);
+
+        if (ballLine.IntersectsWith(HitLines[0]))
         {
             return HitLines[0];
         }
-        else if(ballLine.IntersectsWith(HitLines[1]))
+        else if (ballLine.IntersectsWith(HitLines[1]))
         {
             return HitLines[1];
         }
@@ -48,13 +50,24 @@ public class Block : GameObject
         }
         return default!;
     }
-
     public override void Render(ICanvas canvas, RectF dimensions)
     {
         base.Render(canvas, dimensions);
         
         canvas.StrokeColor = Color;
-        canvas.DrawRectangle(LeftTop.X, LeftTop.Y, 100, 50);
+
+        if (RequiredHits > 0)
+        {
+            canvas.DrawRectangle(LeftTop.X, LeftTop.Y, 100, 50);
+        }
+        if (RequiredHits > 1)
+        {
+            canvas.DrawRectangle(LeftTop.X + 10, LeftTop.Y + 5, 80, 40);
+        }
+        if (RequiredHits > 2)
+        {
+            canvas.DrawRectangle(LeftTop.X + 20, LeftTop.Y + 10, 60, 30);
+        }
         Bounds = new(LeftTop, Size);
     }
     public override void Update(double millisecondsSinceLastUpdate)

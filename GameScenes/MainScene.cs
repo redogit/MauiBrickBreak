@@ -1,6 +1,6 @@
 ﻿using MauiBrickBreak.GameObjects;
-using Microsoft.Maui.Controls.Shapes;
 using Orbit.Engine;
+using System.Numerics;
 
 namespace MauiBrickBreak.GameScenes;
 
@@ -64,6 +64,8 @@ public class MainScene : GameScene
 
         canvas.StrokeSize = 15;
         canvas.StrokeColor = Colors.Black;
+        dimensions.Left += 200;
+        dimensions.Size = new Size(dimensions.Size.Width - 400, dimensions.Size.Height);
         canvas.DrawRectangle(dimensions);
         if (!Ball.BallAttached)
         {
@@ -71,18 +73,18 @@ public class MainScene : GameScene
             // Check paddle collision.
             if (Paddle.Bounds.IntersectsWith(Ball.Bounds))
             {
-                Ball.BallVelocityY *= -1.01f;
+                Ball.Velocity.Y *= -1f;
                 Score++;
             }
             // Check ceiling collision.
             else if (Ball.CenterPoint.Y < 15)
             {
-                Ball.BallVelocityY *= -1;
+                Ball.Velocity.Y *= -1;
             }
             // Check for wall collision.
-            else if (Ball.CenterPoint.X < 15 || Ball.CenterPoint.X > dimensions.Right - 15)
+            else if (Ball.CenterPoint.X < 215 || Ball.CenterPoint.X > dimensions.Right - 15)
             {
-                Ball.BallVelocityX *= -1;
+                Ball.Velocity.X *= -1;
             }
             // Check if ball is below paddle.
             else if (Ball.CenterPoint.Y >= Paddle.Left.Y)
@@ -90,14 +92,22 @@ public class MainScene : GameScene
                 Paddle.Left = Paddle.PaddleStart;
                 Ball.CenterPoint = Ball.BallStart;
                 Ball.BallAttached = true;
-                Ball.BallVelocityX = 0;
-                Ball.BallVelocityY = 0;
+                Ball.Velocity.X = 0;
+                Ball.Velocity.Y = 0;
             }
-            else if (Ball.CenterPoint.Y < 200)
+            else if (Ball.CenterPoint.Y < 200 && Ball.CenterPoint.X > 415 && Ball.CenterPoint.X < 1450)
             {
-                FindBallCollision();
+                int i = FindBallCollision();
+                if (i != -1)
+                {
+                    if (--Blocks[i].RequiredHits == 0)
+                    {
+                        Remove(Blocks[i]);
+                        Blocks.RemoveAt(i);
+                    }
+                }
             }
-            UpdateBall(Ball.BallVelocityX, Ball.BallVelocityY);
+            UpdateBall(Ball.Velocity);
             #endregion ball
 
             #region Score
@@ -106,45 +116,37 @@ public class MainScene : GameScene
             
         }
     }
-    public void UpdatePaddle(float x, float y)
+    public void UpdatePaddle(Vector3 Update)
     {
-        Paddle.UpdatePaddle(x, y);
+       Paddle.UpdatePaddle(Update);
     }
 
-    public void UpdateBall(float x, float y)
+    public void UpdateBall(Vector3 Update)
     {
-
-
-        Ball.UpdateBall(x, y);
+        Ball.UpdateBall(Update);
     }
-    public bool FindBallCollision()
-    {
 
-        RectF FakeBall = new RectF(Ball.CenterPoint.X + Ball.BallVelocityX + Ball.BallVelocityX, Ball.CenterPoint.Y + Ball.BallVelocityY + Ball.BallVelocityY, Ball.RadiusX, Ball.RadiusY);
+    public int FindBallCollision()
+    {
         for (int i = 0; i < Blocks.Count; i++)
         {
-            if(FakeBall.IntersectsWith(Blocks[i].Bounds))
+            if (Blocks[i].Bounds.IntersectsWith(Ball.Bounds.Offset(new PointF(Ball.Velocity.X * 2, Ball.Velocity.Y * 2))))
             {
                 var LineHit = Blocks[i].GetIntersectingHitLine(Ball);
-                if(!LineHit.IsEmpty)
+                if (!LineHit.IsEmpty)
                 {
-                    if(LineHit.Width == 1)
+                    if (LineHit.Width == 1)
                     {
-                        Ball.BallVelocityX *= -1;
+                        Ball.Velocity.X *= -1;
                     }
                     else
                     {
-                        Ball.BallVelocityY *= -1;
+                        Ball.Velocity.Y *= -1;
                     }
+                    return i;
                 }
-                if (--Blocks[i].RequiredHits == 0)
-                {
-                    Remove(Blocks[i]);
-                    Blocks.RemoveAt(i);
-                }
-                return true;
             }
         }
-        return false;
+        return -1;
     }
 }
