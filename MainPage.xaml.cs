@@ -130,7 +130,8 @@ public partial class MainPage : ContentPage
             case "l":
                 if (mainScene.Ball.BallAttached)
                 {
-                    mainScene.Ball.LaunchBall();
+                    
+                    mainScene.Ball.LaunchBall(GameView.WidthRequest - 215);
                 }
                 break;
             default:

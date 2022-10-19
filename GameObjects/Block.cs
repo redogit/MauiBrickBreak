@@ -30,7 +30,7 @@ public class Block : GameObject
     public RectF GetIntersectingHitLine(Ball ball)
     {
 
-        RectF ballLine = new(ball.CenterPoint.X + ball.Velocity.X * 2, ball.CenterPoint.Y + ball.Velocity.Y * 2, ball.RadiusX, ball.RadiusY);
+        RectF ballLine = new(ball.CenterPoint.X + ball.Velocity.X + ball.Velocity.X, ball.CenterPoint.Y + ball.Velocity.Y + ball.Velocity.Y, ball.RadiusX, ball.RadiusY);
 
         if (ballLine.IntersectsWith(HitLines[0]))
         {

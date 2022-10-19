@@ -64,8 +64,7 @@ public class MainScene : GameScene
 
         canvas.StrokeSize = 15;
         canvas.StrokeColor = Colors.Black;
-        dimensions.Left += 200;
-        dimensions.Size = new Size(dimensions.Size.Width - 400, dimensions.Size.Height);
+
         canvas.DrawRectangle(dimensions);
         if (!Ball.BallAttached)
         {
@@ -82,7 +81,7 @@ public class MainScene : GameScene
                 Ball.Velocity.Y *= -1;
             }
             // Check for wall collision.
-            else if (Ball.CenterPoint.X < 215 || Ball.CenterPoint.X > dimensions.Right - 15)
+            else if (Ball.CenterPoint.X < 215 || Ball.CenterPoint.X > dimensions.Right - 215)
             {
                 Ball.Velocity.X *= -1;
             }
@@ -95,7 +94,7 @@ public class MainScene : GameScene
                 Ball.Velocity.X = 0;
                 Ball.Velocity.Y = 0;
             }
-            else if (Ball.CenterPoint.Y < 200 && Ball.CenterPoint.X > 415 && Ball.CenterPoint.X < 1450)
+            else if (Ball.CenterPoint.Y < 175 && Ball.CenterPoint.X > 415 && Ball.CenterPoint.X < 1315)
             {
                 int i = FindBallCollision();
                 if (i != -1)
@@ -130,21 +129,18 @@ public class MainScene : GameScene
     {
         for (int i = 0; i < Blocks.Count; i++)
         {
-            if (Blocks[i].Bounds.IntersectsWith(Ball.Bounds.Offset(new PointF(Ball.Velocity.X * 2, Ball.Velocity.Y * 2))))
+            var LineHit = Blocks[i].GetIntersectingHitLine(Ball);
+            if (!LineHit.IsEmpty)
             {
-                var LineHit = Blocks[i].GetIntersectingHitLine(Ball);
-                if (!LineHit.IsEmpty)
+                if (LineHit.Width == 1)
                 {
-                    if (LineHit.Width == 1)
-                    {
-                        Ball.Velocity.X *= -1;
-                    }
-                    else
-                    {
-                        Ball.Velocity.Y *= -1;
-                    }
-                    return i;
+                    Ball.Velocity.X *= -1;
                 }
+                else
+                {
+                    Ball.Velocity.Y *= -1;
+                }
+                return i;
             }
         }
         return -1;
