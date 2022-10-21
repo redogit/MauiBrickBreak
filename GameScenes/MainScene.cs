@@ -10,8 +10,7 @@ public class MainScene : GameScene
 
     internal readonly Ball Ball;
 
-    private int Score = 0;
-
+    internal int Score = 0;
     internal List<Block> Blocks = new();
     public MainScene(Paddle Paddle, Ball Ball)
     {
@@ -21,38 +20,38 @@ public class MainScene : GameScene
         this.Ball = Ball;
         Add(Paddle);
         Add(Ball);
-        Blocks.Add(new() { LeftTop = new(415, 15), Color = Colors.Grey });
-        Blocks.Add(new() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
-        Blocks.Add(new() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
-        Blocks.Add(new() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
-        Blocks.Add(new() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
-        Blocks.Add(new() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
-        Blocks.Add(new() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
-        Blocks.Add(new() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
-        Blocks.Add(new() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
-        Blocks.Add(new() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
-        Blocks.Add(new() { LeftTop = new(415, 70), Color = Colors.Grey });
-        Blocks.Add(new() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
-        Blocks.Add(new() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
-        Blocks.Add(new() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
-        Blocks.Add(new() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
-        Blocks.Add(new() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
-        Blocks.Add(new() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
-        Blocks.Add(new() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
-        Blocks.Add(new() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
-        Blocks.Add(new() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
-        Blocks.Add(new() { LeftTop = new(415, 125), Color = Colors.Grey });
-        Blocks.Add(new() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
-        Blocks.Add(new() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
-        Blocks.Add(new() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
-        Blocks.Add(new() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
-        Blocks.Add(new() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
-        Blocks.Add(new() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
-        Blocks.Add(new() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
-        Blocks.Add(new() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
-        Blocks.Add(new() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
 
-        foreach (var block in Blocks)
+        Blocks.Add(new Block() { LeftTop = new(415, 15), Color = Colors.Grey });
+        Blocks.Add(new Block() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
+        Blocks.Add(new Block() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
+        Blocks.Add(new Block() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
+        Blocks.Add(new Block() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
+        Blocks.Add(new Block() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
+        Blocks.Add(new Block() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
+        Blocks.Add(new Block() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
+        Blocks.Add(new Block() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
+        Blocks.Add(new Block() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
+        Blocks.Add(new Block() { LeftTop = new(415, 70), Color = Colors.Grey });
+        Blocks.Add(new Block() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
+        Blocks.Add(new Block() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
+        Blocks.Add(new Block() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
+        Blocks.Add(new Block() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
+        Blocks.Add(new Block() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
+        Blocks.Add(new Block() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
+        Blocks.Add(new Block() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
+        Blocks.Add(new Block() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
+        Blocks.Add(new Block() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
+        Blocks.Add(new Block() { LeftTop = new(415, 125), Color = Colors.Grey });
+        Blocks.Add(new Block() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
+        Blocks.Add(new Block() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
+        Blocks.Add(new Block() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
+        Blocks.Add(new Block() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
+        Blocks.Add(new Block() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
+        Blocks.Add(new Block() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
+        Blocks.Add(new Block() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
+        Blocks.Add(new Block() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
+        Blocks.Add(new Block() { LeftTop = Blocks[^1].LeftTop.Offset(105, 0), Color = Colors.Grey });
+        foreach(Block block in Blocks)
         {
             Add(block);
         }
@@ -66,55 +65,39 @@ public class MainScene : GameScene
         canvas.StrokeColor = Colors.Black;
 
         canvas.DrawRectangle(dimensions);
-        if (!Ball.BallAttached)
+
+        canvas.StrokeSize = 1;
+        canvas.StrokeColor = Colors.Black;
+        Vector3 velo = new(-5, -5, 0);
+        Vector3 velocity = Ball.Velocity == Vector3.Zero ? velo : Ball.Velocity;
+        Vector3 Location = Ball.CenterPoint;
+        for (int i = 0; i < 199; i++)
         {
-            #region ball
-            // Check paddle collision.
-            if (Paddle.Bounds.IntersectsWith(Ball.Bounds))
+            if ((Location + velocity).X < 215 || (Location + velocity).X > dimensions.Width - 215)
             {
-                Ball.Velocity.Y *= -1f;
-                Score++;
+                velocity.X *= -1;
             }
-            // Check ceiling collision.
-            else if (Ball.CenterPoint.Y < 15)
+            else if ((Location + velocity).Y < 15)
             {
-                Ball.Velocity.Y *= -1;
+                velocity.Y *= -1;
             }
-            // Check for wall collision.
-            else if (Ball.CenterPoint.X < 215 || Ball.CenterPoint.X > dimensions.Right - 215)
+            if (Location.Y < 190)
             {
-                Ball.Velocity.X *= -1;
-            }
-            // Check if ball is below paddle.
-            else if (Ball.CenterPoint.Y >= Paddle.Left.Y)
-            {
-                Paddle.Left = Paddle.PaddleStart;
-                Ball.CenterPoint = Ball.BallStart;
-                Ball.BallAttached = true;
-                Ball.Velocity.X = 0;
-                Ball.Velocity.Y = 0;
-            }
-            else if (Ball.CenterPoint.Y < 175 && Ball.CenterPoint.X > 415 && Ball.CenterPoint.X < 1315)
-            {
-                int i = FindBallCollision();
-                if (i != -1)
+                for (int x = 0; x < Blocks.Count; x++)
                 {
-                    if (--Blocks[i].RequiredHits == 0)
-                    {
-                        Remove(Blocks[i]);
-                        Blocks.RemoveAt(i);
-                    }
+                    FindCollision(new(Location.X + velocity.X + velocity.X, Location.Y + velocity.Y + velocity.Y, Ball.RadiusX, Ball.RadiusY), ref velocity);
                 }
             }
-            UpdateBall(Ball.Velocity);
-            #endregion ball
-
-            #region Score
-            canvas.DrawString($"Score:{Score}", 15, 10, 100, 50, HorizontalAlignment.Left, VerticalAlignment.Top);
-            #endregion Score
-            
+            canvas.DrawLine(new(Location.X, Location.Y), new(Location.X + velocity.X, Location.Y + velocity.Y));
+            Location += velocity;
         }
+
+        #region Score
+        canvas.DrawString($"Score:{Score}", 15, 10, 100, 50, HorizontalAlignment.Left, VerticalAlignment.Top);
+        #endregion Score
+
     }
+    
     public void UpdatePaddle(Vector3 Update)
     {
        Paddle.UpdatePaddle(Update);
@@ -125,20 +108,20 @@ public class MainScene : GameScene
         Ball.UpdateBall(Update);
     }
 
-    public int FindBallCollision()
+    public int FindCollision(RectF target, ref Vector3 velocity)
     {
         for (int i = 0; i < Blocks.Count; i++)
         {
-            var LineHit = Blocks[i].GetIntersectingHitLine(Ball);
+            var LineHit = Blocks[i].GetIntersectingHitLine(target);
             if (!LineHit.IsEmpty)
             {
                 if (LineHit.Width == 1)
                 {
-                    Ball.Velocity.X *= -1;
+                    velocity.X *= -1;
                 }
                 else
                 {
-                    Ball.Velocity.Y *= -1;
+                    velocity.Y *= -1;
                 }
                 return i;
             }

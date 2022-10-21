@@ -16,35 +16,32 @@ public class Block : GameObject
         HitLines = new[]
         {
             // top
-            new RectF(point,new(Size.Width, 1)),
+            new RectF(point.X, point.Y, Size.Width, 1),
             // left
             new RectF(point, new(1, Size.Height)),
             // right
             new RectF(point.X + Size.Width, point.Y, 1, Size.Height),
             // bottom
-            new RectF(new PointF(point.X, point.Y + Size.Height), new(Size.Width,1))
+            new RectF(new PointF(point.X, point.Y + Size.Height), new(Size.Width, 1))
         };
         return point;
     }
 
-    public RectF GetIntersectingHitLine(Ball ball)
+    public RectF GetIntersectingHitLine(RectF area)
     {
-
-        RectF ballLine = new(ball.CenterPoint.X + ball.Velocity.X + ball.Velocity.X, ball.CenterPoint.Y + ball.Velocity.Y + ball.Velocity.Y, ball.RadiusX, ball.RadiusY);
-
-        if (ballLine.IntersectsWith(HitLines[0]))
+        if (area.IntersectsWith(HitLines[0]))
         {
             return HitLines[0];
         }
-        else if (ballLine.IntersectsWith(HitLines[1]))
+        else if (area.IntersectsWith(HitLines[1]))
         {
             return HitLines[1];
         }
-        else if (ballLine.IntersectsWith(HitLines[2]))
+        else if (area.IntersectsWith(HitLines[2]))
         {
             return HitLines[2];
         }
-        else if (ballLine.IntersectsWith(HitLines[3]))
+        else if (area.IntersectsWith(HitLines[3]))
         {
             return HitLines[3];
         }
