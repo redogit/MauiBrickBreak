@@ -1,24 +1,50 @@
 ﻿using Orbit.Engine;
+using System.Numerics;
 
 namespace MauiBrickBreak.GameObjects;
 
 public class Block : GameObject
 {
-    private PointF leftTop;
-    public PointF LeftTop { get => leftTop; set => leftTop = BuildLines(value); }
+    private Vector3 leftTop;
+    public Vector3 LeftTop { get => leftTop; set => leftTop = BuildLines(value); }
     public SizeF Size = new(100, 50);
     public Color Color { get; set; }
     public RectF[] HitLines { get; set; }
     public int RequiredHits = 3;
     public bool HasBonus = false;
-    private PointF BuildLines(PointF point)
+
+    public override void Render(ICanvas canvas, RectF dimensions)
+    {
+        base.Render(canvas, dimensions);
+        
+        canvas.StrokeColor = Color;
+
+        if (RequiredHits > 0)
+        {
+            canvas.DrawRectangle(LeftTop.X, LeftTop.Y, 100, 50);
+        }
+        if (RequiredHits > 1)
+        {
+            canvas.DrawRectangle(LeftTop.X + 10, LeftTop.Y + 5, 80, 40);
+        }
+        if (RequiredHits > 2)
+        {
+            canvas.DrawRectangle(LeftTop.X + 20, LeftTop.Y + 10, 60, 30);
+        }
+        Bounds = new(LeftTop.X, LeftTop.Y, Size.Width, Size.Height);
+    }
+    public override void Update(double millisecondsSinceLastUpdate)
+    {
+        base.Update(millisecondsSinceLastUpdate);
+    }
+    private Vector3 BuildLines(Vector3 point)
     {
         HitLines = new[]
         {
             // top
             new RectF(point.X, point.Y, Size.Width, 1),
             // left
-            new RectF(point, new(1, Size.Height)),
+            new RectF(point.X, point.Y, 1, Size.Height),
             // right
             new RectF(point.X + Size.Width, point.Y, 1, Size.Height),
             // bottom
@@ -46,29 +72,5 @@ public class Block : GameObject
             return HitLines[3];
         }
         return default!;
-    }
-    public override void Render(ICanvas canvas, RectF dimensions)
-    {
-        base.Render(canvas, dimensions);
-        
-        canvas.StrokeColor = Color;
-
-        if (RequiredHits > 0)
-        {
-            canvas.DrawRectangle(LeftTop.X, LeftTop.Y, 100, 50);
-        }
-        if (RequiredHits > 1)
-        {
-            canvas.DrawRectangle(LeftTop.X + 10, LeftTop.Y + 5, 80, 40);
-        }
-        if (RequiredHits > 2)
-        {
-            canvas.DrawRectangle(LeftTop.X + 20, LeftTop.Y + 10, 60, 30);
-        }
-        Bounds = new(LeftTop, Size);
-    }
-    public override void Update(double millisecondsSinceLastUpdate)
-    {
-        base.Update(millisecondsSinceLastUpdate);
     }
 }

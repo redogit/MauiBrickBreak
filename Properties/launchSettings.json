@@ -1,8 +1,7 @@
 {
   "profiles": {
     "Windows Machine": {
-      "commandName": "MsixPackage",
-      "alwaysReinstallApp": true
-    }
+      "commandName": "MsixPackage"
+      }
   }
 }
