@@ -7,17 +7,14 @@ public class Paddle : GameObject
 {
     internal Vector3 Start;
     public Vector3 Location = Vector3.Zero;
-    public SizeF Size = new(150, 1);
+    public SizeF Size = new(150, 10);
     public float LeftPitch = 0;
     public float RightPitch = 0;
-    public Color Color { get; set; }
-    
     public override void Render(ICanvas canvas, RectF dimensions)
     {
+        LoadedImage ??= LoadImage("MauiBrickBreak.Resources.Raw." + ImageName);
         base.Render(canvas, dimensions);
-        canvas.StrokeSize = 10;
-        canvas.StrokeColor = Color;
-        canvas.DrawLine(Location.X, Location.Y + LeftPitch, Location.X + Size.Width, Location.Y + RightPitch);
+        canvas.DrawImage(LoadedImage, Location.X, Location.Y, Size.Width, Size.Height);
         Bounds = new(new(Location.X, Location.Y), Size);
     }
     public override void Update(double millisecondsSinceLastUpdate)

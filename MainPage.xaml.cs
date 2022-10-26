@@ -52,18 +52,28 @@ public partial class MainPage : ContentPage
     /// <param name="e"></param>
     private void GameCanvas_Loaded(object sender, EventArgs e)
     {
-        #region Game Setup
-        // round to 10's place
 
-        GameView.WidthRequest = ((int)(contentPage.Width / 10) * 10);
+        System.Reflection.Assembly assembly = typeof(Microsoft.Maui.Graphics.Win2D.W2DCanvas).Assembly;
+        var type = assembly.GetType("Microsoft.Maui.Graphics.Win2D.W2DGraphicsService");
+        var prop = type.GetProperty("GlobalCreator");
+
+        var graphicsView = (GraphicsView)sender;
+        var view = (Microsoft.Maui.Platform.PlatformTouchGraphicsView)graphicsView.Handler.PlatformView;
+        var view2 = (Microsoft.Maui.Graphics.Win2D.W2DGraphicsView)view.Content;
+        prop.SetValue(null, view2.Content);
+
+    #region Game Setup
+    // round to 10's place
+
+    GameView.WidthRequest = ((int)(contentPage.Width / 10) * 10);
         GameView.HeightRequest = ((int)(contentPage.Height / 10) * 10);
         mainScene.Paddle.Location = new Vector3((float)(GameView.WidthRequest * 0.5), (float)GameView.HeightRequest - 50, 0);
         mainScene.Paddle.Start = mainScene.Paddle.Location;
-        mainScene.Ball.Location = new(mainScene.Paddle.Location.X + 75, (float)GameView.HeightRequest - 65, 0);
+        mainScene.Ball.Location = new(mainScene.Paddle.Location.X + 75, (float)GameView.HeightRequest - 70, 0);
         mainScene.Ball.Start = mainScene.Ball.Location;
 
         mainScene.Ball.BallAttached = true;
-        #endregion Game Setup
+#endregion Game Setup
     }
     /// <summary>
     /// handle keys as commands
@@ -153,14 +163,14 @@ public partial class MainPage : ContentPage
                 if (mainScene.Ball.BallAttached)
                 {
                     mainScene.Paddle.RightPitch = 0;
-                    mainScene.Paddle.LeftPitch += 0.1f;
+                    mainScene.Paddle.LeftPitch += 1;
                 }
                 break;
             case "e":
                 if (mainScene.Ball.BallAttached)
                 {
                     mainScene.Paddle.LeftPitch = 0;
-                    mainScene.Paddle.RightPitch += 0.1f;
+                    mainScene.Paddle.RightPitch += 1;
                 }
                 break;
             default:

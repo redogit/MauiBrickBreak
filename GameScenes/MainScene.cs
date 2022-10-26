@@ -14,9 +14,7 @@ public class MainScene : GameScene
     internal List<Block> Blocks = new();
     public MainScene(Paddle Paddle, Ball Ball)
     {
-        Paddle.Color = Colors.Red;
         this.Paddle = Paddle;
-        Ball.Color = Colors.Black;
         this.Ball = Ball;
         Add(Paddle);
         Add(Ball);

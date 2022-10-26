@@ -32,6 +32,7 @@ public static class MauiProgram
 #if WINDOWS
         builder.ConfigureLifecycleEvents(events =>
         {
+           
             events.AddWindows(wndLifeCycleBuilder =>
             {
                 wndLifeCycleBuilder.OnWindowCreated(window =>
