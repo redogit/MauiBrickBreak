@@ -72,7 +72,7 @@ public partial class MainPage : ContentPage
         mainScene.Ball.Location = new(mainScene.Paddle.Location.X + 75, (float)GameView.HeightRequest - 70, 0);
         mainScene.Ball.Start = mainScene.Ball.Location;
 
-        mainScene.Ball.BallAttached = true;
+        mainScene.BallAttached = true;
 #endregion Game Setup
     }
     /// <summary>
@@ -88,7 +88,7 @@ public partial class MainPage : ContentPage
     /// <param name="e"></param>
     public void CommandProcess(object sender, TextChangedEventArgs e)
     {
-        if(mainScene.Ball.BallAttached)
+        if(mainScene.BallAttached)
         {
             ProcessAngle(e);
         }
@@ -99,7 +99,7 @@ public partial class MainPage : ContentPage
                 if (mainScene.Paddle.Location.X - 10 > 215)
                 {
                     mainScene.UpdatePaddle(Left);
-                    if (mainScene.Ball.BallAttached)
+                    if (mainScene.BallAttached)
                     {
                         mainScene.UpdateBall(Left);
                     }
@@ -110,7 +110,7 @@ public partial class MainPage : ContentPage
                 if (mainScene.Paddle.Location.Y + 10 < GameView.HeightRequest - 40)
                 {
                     mainScene.UpdatePaddle(Down);
-                    if (mainScene.Ball.BallAttached)
+                    if (mainScene.BallAttached)
                     {
                         mainScene.UpdateBall(Down);
                     }
@@ -122,7 +122,7 @@ public partial class MainPage : ContentPage
                 {
                     mainScene.UpdatePaddle(Up);
 
-                    if (mainScene.Ball.BallAttached)
+                    if (mainScene.BallAttached)
                     {
                         mainScene.UpdateBall(Up);
                     }
@@ -133,7 +133,7 @@ public partial class MainPage : ContentPage
                 if (mainScene.Paddle.Location.X + mainScene.Paddle.Size.Width + 10 < GameView.WidthRequest - 215)
                 {
                     mainScene.UpdatePaddle(Right);
-                    if (mainScene.Ball.BallAttached)
+                    if (mainScene.BallAttached)
                     {
                         mainScene.UpdateBall(Right);
                     }
@@ -142,7 +142,7 @@ public partial class MainPage : ContentPage
 
             // Handle Launch Command
             case "l":
-                if (mainScene.Ball.BallAttached)
+                if (mainScene.BallAttached)
                 {
                     mainScene.LaunchBall();
                     mainScene.Paddle.LeftPitch = 0;
@@ -160,17 +160,19 @@ public partial class MainPage : ContentPage
         {
             // Handle Left pitch
             case "q":
-                if (mainScene.Ball.BallAttached)
+                if (mainScene.BallAttached)
                 {
                     mainScene.Paddle.RightPitch = 0;
                     mainScene.Paddle.LeftPitch += 1;
+                    mainScene.Paddle.LeftPitch = Math.Clamp(mainScene.Paddle.LeftPitch, 0, 25);
                 }
                 break;
             case "e":
-                if (mainScene.Ball.BallAttached)
+                if (mainScene.BallAttached)
                 {
                     mainScene.Paddle.LeftPitch = 0;
                     mainScene.Paddle.RightPitch += 1;
+                    mainScene.Paddle.RightPitch = Math.Clamp(mainScene.Paddle.RightPitch, 0, 25);
                 }
                 break;
             default:

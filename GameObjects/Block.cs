@@ -6,22 +6,19 @@ namespace MauiBrickBreak.GameObjects;
 public class Block : GameObject
 {
     private Vector3 leftTop;
-    public Vector3 LeftTop { get => leftTop; set => leftTop = BuildLines(value); }
-    public SizeF Size = new(100, 50);
-    public Color Color { get; set; }
+    public Vector3 LeftTop { get => leftTop; set => leftTop = BuildLines(value); } 
     public RectF[] HitLines { get; set; }
     public int RequiredHits = 3;
     public bool HasBonus = false;
 
     public override void Render(ICanvas canvas, RectF dimensions)
     {
+        LoadedImage ??= LoadImage("MauiBrickBreak.Resources.Raw." + ImageName);
         base.Render(canvas, dimensions);
-        
-        canvas.StrokeColor = Color;
 
         if (RequiredHits > 0)
         {
-            canvas.DrawRectangle(LeftTop.X, LeftTop.Y, 100, 50);
+            canvas.DrawImage(LoadedImage, LeftTop.X, LeftTop.Y, 100, 50);
         }
         if (RequiredHits > 1)
         {
@@ -31,7 +28,7 @@ public class Block : GameObject
         {
             canvas.DrawRectangle(LeftTop.X + 20, LeftTop.Y + 10, 60, 30);
         }
-        Bounds = new(LeftTop.X, LeftTop.Y, Size.Width, Size.Height);
+        Bounds = new(LeftTop.X, LeftTop.Y, LoadedImage.Width, LoadedImage.Height);
     }
     public override void Update(double millisecondsSinceLastUpdate)
     {
@@ -39,17 +36,18 @@ public class Block : GameObject
     }
     private Vector3 BuildLines(Vector3 point)
     {
-        HitLines = new[]
-        {
-            // top
-            new RectF(point.X, point.Y, Size.Width, 1),
-            // left
-            new RectF(point.X, point.Y, 1, Size.Height),
-            // right
-            new RectF(point.X + Size.Width, point.Y, 1, Size.Height),
-            // bottom
-            new RectF(new PointF(point.X, point.Y + Size.Height), new(Size.Width, 1))
-        };
+
+            HitLines = new[]
+            {
+                // top
+                new RectF(point.X, point.Y,100, 1),
+                // left
+                new RectF(point.X, point.Y, 1,50),
+                // right
+                new RectF(point.X + 100, point.Y, 1, 50),
+                // bottom
+                new RectF(new PointF(point.X, point.Y + 50), new(100, 1))
+            };
         return point;
     }
 

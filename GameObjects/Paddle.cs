@@ -14,7 +14,16 @@ public class Paddle : GameObject
     {
         LoadedImage ??= LoadImage("MauiBrickBreak.Resources.Raw." + ImageName);
         base.Render(canvas, dimensions);
+        if (LeftPitch > 0)
+        {
+            canvas.Rotate(LeftPitch, Location.X, Location.Y);
+        }
+        else
+        {
+            canvas.Rotate(-RightPitch, Location.X + Size.Width, Location.Y);
+        }
         canvas.DrawImage(LoadedImage, Location.X, Location.Y, Size.Width, Size.Height);
+
         Bounds = new(new(Location.X, Location.Y), Size);
     }
     public override void Update(double millisecondsSinceLastUpdate)

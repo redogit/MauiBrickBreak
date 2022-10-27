@@ -44,7 +44,13 @@
 
 	<ItemGroup>
 	  <MauiAsset Remove="Resources\Raw\Ball.jpg" />
+	  <MauiAsset Remove="Resources\Raw\Block.jpg" />
 	  <MauiAsset Remove="Resources\Raw\Paddle.jpg" />
+	</ItemGroup>
+
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Resources\Raw\Block.jpg" />
 	</ItemGroup>
 
 
