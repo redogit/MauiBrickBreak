@@ -5,11 +5,13 @@ on:
     branches: [master]
     paths:
       - 'REDOGIT.slnx'
+      - 'redogit.json'
       - 'successors/redogit-2026-v2/**'
       - '.github/workflows/redogit-successor.yml'
   pull_request:
     paths:
       - 'REDOGIT.slnx'
+      - 'redogit.json'
       - 'successors/redogit-2026-v2/**'
       - '.github/workflows/redogit-successor.yml'
 
@@ -24,6 +26,8 @@ jobs:
       - uses: actions/setup-dotnet@v6
         with:
           dotnet-version: '10.0.x'
+      - name: Parse REDOGIT contract
+        run: python3 -m json.tool redogit.json > /dev/null
       - name: Build current REDOGIT solution
         run: dotnet build REDOGIT.slnx --configuration Release
       - name: Run successor contract
