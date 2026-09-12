@@ -1,0 +1,26 @@
+name: REDOGIT successor
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'successors/redogit-2026/**'
+      - '.github/workflows/redogit-successor.yml'
+  pull_request:
+    paths:
+      - 'successors/redogit-2026/**'
+      - '.github/workflows/redogit-successor.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '10.0.x'
+      - name: Run successor contract
+        run: dotnet run --project successors/redogit-2026/MauiBrickBreak.Core.csproj --configuration Release
