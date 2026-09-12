@@ -2,26 +2,27 @@
 
 The original .NET MAUI/Orbit brick-breaker remains in this repository as the historical implementation.
 
-## Current build
+## Current build — v2
 
 From the repository root:
 
 ```bash
 dotnet build REDOGIT.slnx --configuration Release
-dotnet run --project successors/redogit-2026/MauiBrickBreak.Core.csproj --configuration Release --no-build
+dotnet run --project successors/redogit-2026-v2/MauiBrickBreak.SelfCheck/MauiBrickBreak.SelfCheck.csproj --configuration Release --no-build
 ```
 
-`REDOGIT.slnx` is the current solution entry point. The historical `MauiBrickBreak.sln`, .NET 6 MAUI application, and rendering code remain intact as predecessor material.
+`REDOGIT.slnx` is the current solution entry point. v2 separates reusable game behavior from its verifier:
 
-The current .NET 10 successor starts from the behavior that matters rather than the old UI/runtime wiring:
+- `MauiBrickBreak.Core` — framework-independent state, geometry, collisions, and observable game events;
+- `MauiBrickBreak.SelfCheck` — executable behavior contract.
 
-- ball motion;
-- wall reflection;
-- paddle reflection;
-- block collision and hit depletion;
-- deterministic state transitions that can be checked without a GUI.
+The current contract verifies wall reflection, paddle reflection, block hit depletion, and the bottom-boundary `BallLost` consequence. A renderer can consume those events without owning the underlying rules.
 
-The predecessor references an `Orbit.Engine` project outside this repository. The REDO core removes that hidden build dependency from the behavior being verified. A future renderer can consume the core rather than own the game rules.
+## Preserved predecessors
+
+- The historical `MauiBrickBreak.sln`, .NET 6 MAUI application, Orbit rendering code, assets, and controls remain intact.
+- `successors/redogit-2026/` remains the first verified framework-independent successor and is now the predecessor to v2.
+- The old app's `Orbit.Engine` reference was outside this repository; neither REDOGIT successor depends on it.
 
 The historical controls were `a/s/w/d` for movement and `l` to launch. Those remain part of the predecessor's record rather than being silently rewritten.
 
