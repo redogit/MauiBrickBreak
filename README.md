@@ -1,17 +1,26 @@
-# MauiBrickBreak
+# MauiBrickBreak — REDO
 
-Visual studio 2022 .net 6 MAUI Game Brick Break
+The original .NET MAUI/Orbit brick-breaker remains in this repository as the historical implementation.
 
-Uses Orbit Engine for GraphicView rendering
+The current rebuild starts from the behavior that matters rather than the old UI/runtime wiring:
 
-Game currently only supports Windows
+- ball motion;
+- wall reflection;
+- paddle reflection;
+- block collision and hit depletion;
+- deterministic state transitions that can be tested without a GUI.
 
-Uses Entry TextChanged event to parse input commands:
-move paddle, launch ball.
+## Current successor
 
-Keyboard input is used
-a = left
-s = down
-w = up
-d = right
-l = launch ball.
+`successors/redogit-2026/` contains a .NET 10 framework-independent game core and an executable smoke test.
+
+```bash
+cd successors/redogit-2026
+dotnet run
+```
+
+The predecessor targeted .NET 6 and referenced an `Orbit.Engine` project outside this repository. The redo removes that hidden build dependency from the behavioral core. A future MAUI renderer can sit on top of the verified core rather than owning the game rules.
+
+The historical controls were `a/s/w/d` for movement and `l` to launch. Those remain part of the predecessor's record rather than being silently rewritten.
+
+See [`REDOGIT.md`](REDOGIT.md).
