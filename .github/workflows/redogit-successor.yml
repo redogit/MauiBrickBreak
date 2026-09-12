@@ -5,12 +5,12 @@ on:
     branches: [master]
     paths:
       - 'REDOGIT.slnx'
-      - 'successors/redogit-2026/**'
+      - 'successors/redogit-2026-v2/**'
       - '.github/workflows/redogit-successor.yml'
   pull_request:
     paths:
       - 'REDOGIT.slnx'
-      - 'successors/redogit-2026/**'
+      - 'successors/redogit-2026-v2/**'
       - '.github/workflows/redogit-successor.yml'
 
 permissions:
@@ -27,4 +27,4 @@ jobs:
       - name: Build current REDOGIT solution
         run: dotnet build REDOGIT.slnx --configuration Release
       - name: Run successor contract
-        run: dotnet run --project successors/redogit-2026/MauiBrickBreak.Core.csproj --configuration Release --no-build
+        run: dotnet run --project successors/redogit-2026-v2/MauiBrickBreak.SelfCheck/MauiBrickBreak.SelfCheck.csproj --configuration Release --no-build
