@@ -20,15 +20,6 @@ permissions:
 
 jobs:
   verify:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-dotnet@v6
-        with:
-          dotnet-version: '10.0.x'
-      - name: Parse REDOGIT contract
-        run: python3 -m json.tool redogit.json > /dev/null
-      - name: Build current REDOGIT solution
-        run: dotnet build REDOGIT.slnx --configuration Release
-      - name: Run successor contract
-        run: dotnet run --project successors/redogit-2026-v2/MauiBrickBreak.SelfCheck/MauiBrickBreak.SelfCheck.csproj --configuration Release --no-build
+    uses: redogit/redogit/.github/workflows/verify-redogit.yml@10c49a25daaff74277bc8e0e84719fc289f4ad3f
+    with:
+      dotnet-version: '10.0.x'
