@@ -20,6 +20,6 @@ permissions:
 
 jobs:
   verify:
-    uses: redogit/redogit/.github/workflows/verify-redogit.yml@10c49a25daaff74277bc8e0e84719fc289f4ad3f
+    uses: redogit/redogit/.github/workflows/verify-redogit.yml@dc2575960b1ac2fbe4b537055be0673cc8146757
     with:
       dotnet-version: '10.0.x'
