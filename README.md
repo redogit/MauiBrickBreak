@@ -2,24 +2,26 @@
 
 The original .NET MAUI/Orbit brick-breaker remains in this repository as the historical implementation.
 
-The current rebuild starts from the behavior that matters rather than the old UI/runtime wiring:
+## Current build
+
+From the repository root:
+
+```bash
+dotnet build REDOGIT.slnx --configuration Release
+dotnet run --project successors/redogit-2026/MauiBrickBreak.Core.csproj --configuration Release --no-build
+```
+
+`REDOGIT.slnx` is the current solution entry point. The historical `MauiBrickBreak.sln`, .NET 6 MAUI application, and rendering code remain intact as predecessor material.
+
+The current .NET 10 successor starts from the behavior that matters rather than the old UI/runtime wiring:
 
 - ball motion;
 - wall reflection;
 - paddle reflection;
 - block collision and hit depletion;
-- deterministic state transitions that can be tested without a GUI.
+- deterministic state transitions that can be checked without a GUI.
 
-## Current successor
-
-`successors/redogit-2026/` contains a .NET 10 framework-independent game core and an executable smoke test.
-
-```bash
-cd successors/redogit-2026
-dotnet run
-```
-
-The predecessor targeted .NET 6 and referenced an `Orbit.Engine` project outside this repository. The redo removes that hidden build dependency from the behavioral core. A future MAUI renderer can sit on top of the verified core rather than owning the game rules.
+The predecessor references an `Orbit.Engine` project outside this repository. The REDO core removes that hidden build dependency from the behavior being verified. A future renderer can consume the core rather than own the game rules.
 
 The historical controls were `a/s/w/d` for movement and `l` to launch. Those remain part of the predecessor's record rather than being silently rewritten.
 
