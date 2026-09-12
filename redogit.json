@@ -1,0 +1,25 @@
+{
+  "$schema": "https://raw.githubusercontent.com/redogit/redogit/main/REDOGIT.schema.json",
+  "schema": "redogit/v1",
+  "repository": "redogit/MauiBrickBreak",
+  "current": {
+    "id": "redogit-2026-v2",
+    "status": "current",
+    "path": "successors/redogit-2026-v2",
+    "build": "dotnet build REDOGIT.slnx --configuration Release",
+    "verify": "dotnet run --project successors/redogit-2026-v2/MauiBrickBreak.SelfCheck/MauiBrickBreak.SelfCheck.csproj --configuration Release --no-build"
+  },
+  "predecessors": [
+    { "id": "legacy-net6-maui-orbit-game", "path": ".", "retained": true },
+    { "id": "redogit-2026", "path": "successors/redogit-2026", "retained": true }
+  ],
+  "history_policy": {
+    "preserve_predecessors": true,
+    "preserve_failures": true,
+    "rewrite_history": false
+  },
+  "boundary": {
+    "owns": ["game state", "ball motion", "collision consequences", "observable game events"],
+    "does_not_own": ["legacy Orbit rendering", "platform UI", "image assets", "input widgets"]
+  }
+}
