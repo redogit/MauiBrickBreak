@@ -1,0 +1,17 @@
+{
+  "$schema": "https://raw.githubusercontent.com/redogit/redogit/main/LIBRARY_PATTERN.schema.json",
+  "schema": "redogit/library-pattern/v1",
+  "repository": "redogit/MauiBrickBreak",
+  "role": "project-lineage-successor",
+  "status": "active-method-overlay",
+  "synced_at": "2026-09-16",
+  "canonical_method": "Recursive Scientific Reconstruction + Library Consolidation / Orbit provenance-retrieval-admission discipline",
+  "records": ["identity", "source_identity", "provenance", "chronology", "current_authority", "observer_or_task", "relation_type", "evidence_status", "claim_ceiling", "transform_history", "failures_nulls_invalids", "improvement_coordinates", "access_privacy_rights", "unresolved_remainder", "recovery_handle"],
+  "invariants": ["IDENTITY_BEFORE_SIMILARITY", "SOURCE_NATIVE_BEFORE_SYNTHESIS", "HISTORICAL_AUTHORITY != CURRENT_AUTHORITY", "RELATED != SUPPORTS", "RETRIEVAL != EVIDENCE", "OBSERVATION != INTERPRETATION", "GENERATION != CERTIFICATION", "PROMOTION_REQUIRES_EXPLICIT_WITNESS", "FAILURES_NULLS_INVALIDS_ARE_RETAINED", "CROSS_PROJECT_RELATION != AUTHORITY_TRANSFER", "VIEWPOINT_CHANGE != TASK_CHANGE", "PRESERVED != AVAILABLE != ACTIVE"],
+  "relation_policy": "Relations retrieve and organize candidates; relation or similarity alone never transfers evidence, identity, truth, or authority.",
+  "admission_policy": "Import method/navigation support by default. Promote evidence or conclusions only after receiver-local verification against an explicit obligation, baseline, claim ceiling, and improvement witness.",
+  "authority_policy": "Each source/project remains authoritative only for what its own current evidence and declared boundary support; historical/source-native records are never rewritten to fit the overlay.",
+  "recovery_policy": "Preserve source identity, predecessors, failures/nulls/invalids, unresolved remainder, and stable recovery handles; add successor/supersession edges instead of destructive replacement.",
+  "local_counterpart": null,
+  "notes": ["This binding is metadata/method support, not a scientific result and not a runtime authority transfer.", "Private Library contents and paths are not exported by this public binding."]
+}
