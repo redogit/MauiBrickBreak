@@ -1,5 +1,7 @@
 # MauiBrickBreak — REDO
 
+Commercial-access note: the existing MIT license remains authoritative for material it covers. The owner's newer no-commercial-access policy does not revoke MIT rights; it governs only material not already covered by an existing license. See [COMMERCIAL_ACCESS_POLICY.md](COMMERCIAL_ACCESS_POLICY.md).
+
 The original .NET MAUI/Orbit brick-breaker remains in this repository as the historical implementation.
 
 ## Current build — v2
