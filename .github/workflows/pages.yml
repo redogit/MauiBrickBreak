@@ -1,4 +1,5 @@
 name: Deploy project page
+# Source-aware landing deployment.
 
 on:
   push:
